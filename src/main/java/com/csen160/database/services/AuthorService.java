@@ -1,23 +1,23 @@
 package com.csen160.database.services;
 
-import com.csen160.database.domain.entities.Author;
+import com.csen160.database.domain.entities.AuthorEntity;
 import com.csen160.database.domain.dto.AuthorDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AuthorService {
-    Author save(Author author);
+    AuthorEntity save(AuthorEntity authorEntity);
 
-    List<Author> findAll();
+    List<AuthorEntity> findAll();
 
-    Optional<Author> findOne(Long id);
+    Optional<AuthorEntity> findOne(Long id);
 
     boolean isExists(Long id);
 
-    Author partialUpdate(Long id, Author author);
+    AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity);
 
     void delete(Long id);
 
-    public Author update(Long id, AuthorDto dto);
+    public AuthorEntity update(Long id, AuthorDto dto);
 }

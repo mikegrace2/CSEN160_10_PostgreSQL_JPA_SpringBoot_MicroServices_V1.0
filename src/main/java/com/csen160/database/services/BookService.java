@@ -1,6 +1,6 @@
 package com.csen160.database.services;
 
-import com.csen160.database.domain.entities.Book;
+import com.csen160.database.domain.entities.BookEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,17 +9,17 @@ import java.util.Optional;
 
 public interface BookService {
 
-    Book createUpdateBook(String isbn, Book book);
+    BookEntity createUpdateBook(String isbn, BookEntity bookEntity);
 
-    List<Book> findAll();
+    List<BookEntity> findAll();
 
-    Page<Book> findAll(Pageable pageable);
+    Page<BookEntity> findAll(Pageable pageable);
 
-    Optional<Book> findOne(String isbn);
+    Optional<BookEntity> findOne(String isbn);
 
     boolean isExists(String isbn);
 
-    Book partialUpdate(String isbn, Book book);
+    BookEntity partialUpdate(String isbn, BookEntity bookEntity);
 
     void delete(String isbn);
 

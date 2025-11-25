@@ -1,7 +1,7 @@
 package com.csen160.database.controllers;
 
 import com.csen160.database.domain.dto.BookDto;
-import com.csen160.database.domain.entities.Book;
+import com.csen160.database.domain.entities.BookEntity;
 import com.csen160.database.mappers.Mapper;
 import com.csen160.database.services.BookService;
 import org.springframework.http.HttpStatus;
@@ -16,19 +16,19 @@ import java.util.stream.Collectors;
 public class BookController {
 
     private BookService bookService;
-    private Mapper<Book, BookDto> bookMapper;
+    private Mapper<BookEntity, BookDto> bookMapper;
 
-    public BookController(Mapper<Book, BookDto> bookMapper, BookService bookService) {
+    public BookController(Mapper<BookEntity, BookDto> bookMapper, BookService bookService) {
         this.bookMapper = bookMapper;
         this.bookService = bookService;
     }
 
     @PutMapping(path = "/books/{isbn}")
     public ResponseEntity<BookDto> createUpdateBook(@PathVariable String isbn, @RequestBody BookDto bookDto) {
-        Book book = bookMapper.mapFrom(bookDto);
+        BookEntity bookEntity = bookMapper.mapFrom(bookDto);
         boolean bookExists = bookService.isExists(isbn);
-        Book savedBook = bookService.createUpdateBook(isbn, book);
-        BookDto savedUpdatedBookDto = bookMapper.mapTo(savedBook);
+        BookEntity savedBookEntity = bookService.createUpdateBook(isbn, bookEntity);
+        BookDto savedUpdatedBookDto = bookMapper.mapTo(savedBookEntity);
 
         if(bookExists){
             return new ResponseEntity(savedUpdatedBookDto, HttpStatus.OK);
@@ -46,25 +46,25 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Book book = bookMapper.mapFrom(bookDto);
-        Book updatedBook = bookService.partialUpdate(isbn, book);
+        BookEntity bookEntity = bookMapper.mapFrom(bookDto);
+        BookEntity updatedBookEntity = bookService.partialUpdate(isbn, bookEntity);
         return new ResponseEntity<>(
-                bookMapper.mapTo(updatedBook),
+                bookMapper.mapTo(updatedBookEntity),
                 HttpStatus.OK);
 
     }
 
     @GetMapping(path = "/books")
     public List<BookDto> listBooks() {
-        List<Book> books = bookService.findAll();
-        return books.stream()
+        List<BookEntity> bookEntities = bookService.findAll();
+        return bookEntities.stream()
                 .map(bookMapper::mapTo)
                 .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/books/{isbn}")
     public ResponseEntity<BookDto> getBook(@PathVariable("isbn") String isbn) {
-        Optional<Book> foundBook = bookService.findOne(isbn);
+        Optional<BookEntity> foundBook = bookService.findOne(isbn);
         return foundBook.map(bookEntity -> {
             BookDto bookDto = bookMapper.mapTo(bookEntity);
             return new ResponseEntity<>(bookDto, HttpStatus.OK);

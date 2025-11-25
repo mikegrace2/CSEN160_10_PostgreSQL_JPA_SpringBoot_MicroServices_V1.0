@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class AuthorEntityRepositoryIntegrationTests {
+public class AuthorEntityEntityRepositoryIntegrationTests {
 
     private AuthorRepository underTest;
 
     @Autowired
-    public AuthorEntityRepositoryIntegrationTests(AuthorRepository underTest) {
+    public AuthorEntityEntityRepositoryIntegrationTests(AuthorRepository underTest) {
         this.underTest = underTest;
     }
 

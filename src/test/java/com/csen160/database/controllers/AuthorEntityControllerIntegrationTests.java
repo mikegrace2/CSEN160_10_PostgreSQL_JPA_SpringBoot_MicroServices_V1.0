@@ -2,7 +2,7 @@ package com.csen160.database.controllers;
 
 import com.csen160.database.TestDataUtil;
 import com.csen160.database.domain.dto.AuthorDto;
-import com.csen160.database.domain.entities.Author;
+import com.csen160.database.domain.entities.AuthorEntity;
 import com.csen160.database.services.AuthorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
-public class AuthorControllerIntegrationTests {
+public class AuthorEntityControllerIntegrationTests {
 
     private AuthorService authorService;
 
@@ -30,7 +30,7 @@ public class AuthorControllerIntegrationTests {
     private ObjectMapper objectMapper;
 
     @Autowired
-    public AuthorControllerIntegrationTests(MockMvc mockMvc, AuthorService authorService) {
+    public AuthorEntityControllerIntegrationTests(MockMvc mockMvc, AuthorService authorService) {
         this.mockMvc = mockMvc;
         this.authorService = authorService;
         this.objectMapper = new ObjectMapper();
@@ -38,9 +38,9 @@ public class AuthorControllerIntegrationTests {
 
     @Test
     public void testThatCreateAuthorSuccessfullyReturnsHttp201Created() throws Exception {
-        Author testAuthorA = TestDataUtil.createTestAuthorEntityA();
-        testAuthorA.setId(null);
-        String authorJson = objectMapper.writeValueAsString(testAuthorA);
+        AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorEntityA();
+        testAuthorEntityA.setId(null);
+        String authorJson = objectMapper.writeValueAsString(testAuthorEntityA);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/authors")

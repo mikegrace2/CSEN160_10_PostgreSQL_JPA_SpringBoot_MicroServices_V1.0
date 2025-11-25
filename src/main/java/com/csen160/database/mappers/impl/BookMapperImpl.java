@@ -1,13 +1,13 @@
 package com.csen160.database.mappers.impl;
 
 import com.csen160.database.domain.dto.BookDto;
-import com.csen160.database.domain.entities.Book;
+import com.csen160.database.domain.entities.BookEntity;
 import com.csen160.database.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookMapperImpl implements Mapper<Book, BookDto> {
+public class BookMapperImpl implements Mapper<BookEntity, BookDto> {
 
     private ModelMapper modelMapper;
 
@@ -16,12 +16,12 @@ public class BookMapperImpl implements Mapper<Book, BookDto> {
     }
 
     @Override
-    public BookDto mapTo(Book book) {
-        return modelMapper.map(book, BookDto.class);
+    public BookDto mapTo(BookEntity bookEntity) {
+        return modelMapper.map(bookEntity, BookDto.class);
     }
 
     @Override
-    public Book mapFrom(BookDto bookDto) {
-        return modelMapper.map(bookDto, Book.class);
+    public BookEntity mapFrom(BookDto bookDto) {
+        return modelMapper.map(bookDto, BookEntity.class);
     }
 }

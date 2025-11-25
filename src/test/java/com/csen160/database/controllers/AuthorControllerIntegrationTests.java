@@ -2,7 +2,7 @@ package com.csen160.database.controllers;
 
 import com.csen160.database.TestDataUtil;
 import com.csen160.database.domain.dto.AuthorDto;
-import com.csen160.database.domain.entities.AuthorEntity;
+import com.csen160.database.domain.entities.Author;
 import com.csen160.database.services.AuthorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class AuthorControllerIntegrationTests {
 
     @Test
     public void testThatCreateAuthorSuccessfullyReturnsHttp201Created() throws Exception {
-        AuthorEntity testAuthorA = TestDataUtil.createTestAuthorEntityA();
+        Author testAuthorA = TestDataUtil.createTestAuthorEntityA();
         testAuthorA.setId(null);
         String authorJson = objectMapper.writeValueAsString(testAuthorA);
 

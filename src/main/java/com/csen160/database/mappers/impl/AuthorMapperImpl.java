@@ -1,13 +1,13 @@
 package com.csen160.database.mappers.impl;
 
 import com.csen160.database.domain.dto.AuthorDto;
-import com.csen160.database.domain.entities.AuthorEntity;
+import com.csen160.database.domain.entities.Author;
 import com.csen160.database.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthorMapperImpl implements Mapper<AuthorEntity, AuthorDto> {
+public class AuthorMapperImpl implements Mapper<Author, AuthorDto> {
 
     private ModelMapper modelMapper;
 
@@ -16,12 +16,12 @@ public class AuthorMapperImpl implements Mapper<AuthorEntity, AuthorDto> {
     }
 
     @Override
-    public AuthorDto mapTo(AuthorEntity authorEntity) {
-        return modelMapper.map(authorEntity, AuthorDto.class);
+    public AuthorDto mapTo(Author author) {
+        return modelMapper.map(author, AuthorDto.class);
     }
 
     @Override
-    public AuthorEntity mapFrom(AuthorDto authorDto) {
-        return modelMapper.map(authorDto, AuthorEntity.class);
+    public Author mapFrom(AuthorDto authorDto) {
+        return modelMapper.map(authorDto, Author.class);
     }
 }

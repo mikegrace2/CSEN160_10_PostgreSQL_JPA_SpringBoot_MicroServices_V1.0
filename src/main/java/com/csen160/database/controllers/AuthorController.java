@@ -1,7 +1,7 @@
 package com.csen160.database.controllers;
 
 import com.csen160.database.domain.dto.AuthorDto;
-import com.csen160.database.domain.entities.AuthorEntity;
+import com.csen160.database.domain.entities.Author;
 import com.csen160.database.mappers.Mapper;
 import com.csen160.database.services.AuthorService;
 import org.springframework.http.HttpStatus;
@@ -17,23 +17,23 @@ public class AuthorController {
 
     private AuthorService authorService;
 
-    private Mapper<AuthorEntity, AuthorDto> authorMapper;
+    private Mapper<Author, AuthorDto> authorMapper;
 
-    public AuthorController(AuthorService authorService, Mapper<AuthorEntity, AuthorDto> authorMapper) {
+    public AuthorController(AuthorService authorService, Mapper<Author, AuthorDto> authorMapper) {
         this.authorService = authorService;
         this.authorMapper = authorMapper;
     }
 
     @PostMapping(path = "/authors")
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto author) {
-        AuthorEntity authorEntity = authorMapper.mapFrom(author);
-        AuthorEntity savedAuthorEntity = authorService.save(authorEntity);
-        return new ResponseEntity<>(authorMapper.mapTo(savedAuthorEntity), HttpStatus.CREATED);
+        Author authorEntity = authorMapper.mapFrom(author);
+        Author savedAuthor = authorService.save(authorEntity);
+        return new ResponseEntity<>(authorMapper.mapTo(savedAuthor), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/authors")
     public List<AuthorDto> listAuthors() {
-        List<AuthorEntity> authors = authorService.findAll();
+        List<Author> authors = authorService.findAll();
         return authors.stream()
                 .map(authorMapper::mapTo)
                 .collect(Collectors.toList());
@@ -41,7 +41,7 @@ public class AuthorController {
 
     @GetMapping(path = "/authors/{id}")
     public ResponseEntity<AuthorDto> getAuthor(@PathVariable("id") Long id) {
-        Optional<AuthorEntity> foundAuthor = authorService.findOne(id);
+        Optional<Author> foundAuthor = authorService.findOne(id);
         return foundAuthor.map(authorEntity -> {
             AuthorDto authorDto = authorMapper.mapTo(authorEntity);
             return new ResponseEntity<>(authorDto, HttpStatus.OK);
@@ -58,10 +58,10 @@ public class AuthorController {
         }
 
         authorDto.setId(id);
-        AuthorEntity authorEntity = authorMapper.mapFrom(authorDto);
-        AuthorEntity savedAuthorEntity = authorService.save(authorEntity);
+        Author author = authorMapper.mapFrom(authorDto);
+        Author savedAuthor = authorService.save(author);
         return new ResponseEntity<>(
-                authorMapper.mapTo(savedAuthorEntity),
+                authorMapper.mapTo(savedAuthor),
                 HttpStatus.OK);
     }
 
@@ -74,8 +74,8 @@ public class AuthorController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        AuthorEntity authorEntity = authorMapper.mapFrom(authorDto);
-        AuthorEntity updatedAuthor = authorService.partialUpdate(id, authorEntity);
+        Author author = authorMapper.mapFrom(authorDto);
+        Author updatedAuthor = authorService.partialUpdate(id, author);
         return new ResponseEntity<>(
                 authorMapper.mapTo(updatedAuthor),
                 HttpStatus.OK);
@@ -86,5 +86,4 @@ public class AuthorController {
         authorService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
 }

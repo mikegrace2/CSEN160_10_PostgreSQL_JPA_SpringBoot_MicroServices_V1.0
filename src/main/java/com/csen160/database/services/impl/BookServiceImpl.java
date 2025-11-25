@@ -1,6 +1,6 @@
 package com.csen160.database.services.impl;
 
-import com.csen160.database.domain.entities.BookEntity;
+import com.csen160.database.domain.entities.Book;
 import com.csen160.database.repositories.BookRepository;
 import com.csen160.database.services.BookService;
 import org.springframework.data.domain.Page;
@@ -22,13 +22,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookEntity createUpdateBook(String isbn, BookEntity book) {
+    public Book createUpdateBook(String isbn, Book book) {
         book.setIsbn(isbn);
         return bookRepository.save(book);
     }
 
     @Override
-    public List<BookEntity> findAll() {
+    public List<Book> findAll() {
         return StreamSupport
                 .stream(
                         bookRepository.findAll().spliterator(),
@@ -37,12 +37,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<BookEntity> findAll(Pageable pageable) {
+    public Page<Book> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable);
     }
 
     @Override
-    public Optional<BookEntity> findOne(String isbn) {
+    public Optional<Book> findOne(String isbn) {
         return bookRepository.findById(isbn);
     }
 
@@ -52,11 +52,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookEntity partialUpdate(String isbn, BookEntity bookEntity) {
-        bookEntity.setIsbn(isbn);
+    public Book partialUpdate(String isbn, Book book) {
+        book.setIsbn(isbn);
 
         return bookRepository.findById(isbn).map(existingBook -> {
-            Optional.ofNullable(bookEntity.getTitle()).ifPresent(existingBook::setTitle);
+            Optional.ofNullable(book.getTitle()).ifPresent(existingBook::setTitle);
             return bookRepository.save(existingBook);
         }).orElseThrow(() -> new RuntimeException("Book does not exist"));
     }

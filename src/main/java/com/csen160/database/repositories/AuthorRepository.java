@@ -1,15 +1,15 @@
 package com.csen160.database.repositories;
 
-import com.csen160.database.domain.entities.AuthorEntity;
+import com.csen160.database.domain.entities.Author;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<AuthorEntity, Long> {
+public interface AuthorRepository extends CrudRepository<Author, Long> {
 
-    Iterable<AuthorEntity> ageLessThan(int age);
+    Iterable<Author> ageLessThan(int age);
 
-    @Query("SELECT a from AuthorEntity a where a.age > ?1")
-    Iterable<AuthorEntity> findAuthorsWithAgeGreaterThan(int age);
+    @Query("SELECT a from Author a where a.age > ?1")
+    Iterable<Author> findAuthorsWithAgeGreaterThan(int age);
 }

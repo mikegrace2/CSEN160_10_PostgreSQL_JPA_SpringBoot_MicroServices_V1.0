@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="books")
-public class BookEntity {
+public class Book {
 
     @Id
     private String isbn;
@@ -21,6 +21,6 @@ public class BookEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
-    private AuthorEntity authorEntity;
+    private Author author;
 
 }

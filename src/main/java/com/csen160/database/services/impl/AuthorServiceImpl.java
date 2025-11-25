@@ -1,6 +1,6 @@
 package com.csen160.database.services.impl;
 
-import com.csen160.database.domain.entities.AuthorEntity;
+import com.csen160.database.domain.entities.Author;
 import com.csen160.database.domain.dto.AuthorDto;
 import com.csen160.database.repositories.AuthorRepository;
 import com.csen160.database.services.AuthorService;
@@ -23,12 +23,12 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorEntity save(AuthorEntity authorEntity) {
-        return authorRepository.save(authorEntity);
+    public Author save(Author author) {
+        return authorRepository.save(author);
     }
 
     @Override
-    public List<AuthorEntity> findAll() {
+    public List<Author> findAll() {
         return StreamSupport.stream(authorRepository
                         .findAll()
                         .spliterator(),
@@ -37,7 +37,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Optional<AuthorEntity> findOne(Long id) {
+    public Optional<Author> findOne(Long id) {
         return authorRepository.findById(id);
     }
 
@@ -47,18 +47,18 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity) {
-        authorEntity.setId(id);
+    public Author partialUpdate(Long id, Author author) {
+        author.setId(id);
 
         return authorRepository.findById(id).map(existingAuthor -> {
-            Optional.ofNullable(authorEntity.getName()).ifPresent(existingAuthor::setName);
-            Optional.ofNullable(authorEntity.getAge()).ifPresent(existingAuthor::setAge);
+            Optional.ofNullable(author.getName()).ifPresent(existingAuthor::setName);
+            Optional.ofNullable(author.getAge()).ifPresent(existingAuthor::setAge);
             return authorRepository.save(existingAuthor);
         }).orElseThrow(() -> new RuntimeException("Author does not exist"));
     }
 
-    public AuthorEntity update(Long id, AuthorDto dto) {
-        AuthorEntity existing = authorRepository.findById(id)
+    public Author update(Long id, AuthorDto dto) {
+        Author existing = authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author not found"));
         existing.setName(dto.getName());
         existing.setAge(dto.getAge());

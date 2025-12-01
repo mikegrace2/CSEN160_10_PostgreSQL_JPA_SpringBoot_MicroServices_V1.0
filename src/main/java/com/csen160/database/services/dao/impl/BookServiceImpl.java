@@ -1,8 +1,8 @@
-package com.csen160.database.services.impl;
+package com.csen160.database.services.dao.impl;
 
 import com.csen160.database.domain.entities.BookEntity;
 import com.csen160.database.repositories.BookRepository;
-import com.csen160.database.services.BookService;
+import com.csen160.database.services.dao.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

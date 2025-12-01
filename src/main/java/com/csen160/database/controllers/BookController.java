@@ -3,7 +3,7 @@ package com.csen160.database.controllers;
 import com.csen160.database.domain.dto.BookDto;
 import com.csen160.database.domain.entities.BookEntity;
 import com.csen160.database.mappers.Mapper;
-import com.csen160.database.services.BookService;
+import com.csen160.database.services.dao.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

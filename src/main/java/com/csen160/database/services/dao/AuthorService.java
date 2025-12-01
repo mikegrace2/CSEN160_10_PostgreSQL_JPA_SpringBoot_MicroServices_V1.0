@@ -1,4 +1,4 @@
-package com.csen160.database.services;
+package com.csen160.database.services.dao;
 
 import com.csen160.database.domain.entities.AuthorEntity;
 import com.csen160.database.domain.dto.AuthorDto;

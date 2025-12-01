@@ -3,7 +3,7 @@ package com.csen160.database.controllers;
 import com.csen160.database.domain.dto.AuthorDto;
 import com.csen160.database.domain.entities.AuthorEntity;
 import com.csen160.database.mappers.Mapper;
-import com.csen160.database.services.AuthorService;
+import com.csen160.database.services.dao.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

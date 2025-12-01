@@ -3,7 +3,7 @@ package com.csen160.database.controllers;
 import com.csen160.database.TestDataUtil;
 import com.csen160.database.domain.dto.BookDto;
 import com.csen160.database.domain.entities.BookEntity;
-import com.csen160.database.services.BookService;
+import com.csen160.database.services.dao.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

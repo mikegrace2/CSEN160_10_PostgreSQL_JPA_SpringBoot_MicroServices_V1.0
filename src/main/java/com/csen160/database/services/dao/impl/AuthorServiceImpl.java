@@ -1,9 +1,9 @@
-package com.csen160.database.services.impl;
+package com.csen160.database.services.dao.impl;
 
 import com.csen160.database.domain.entities.AuthorEntity;
 import com.csen160.database.domain.dto.AuthorDto;
 import com.csen160.database.repositories.AuthorRepository;
-import com.csen160.database.services.AuthorService;
+import com.csen160.database.services.dao.AuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
